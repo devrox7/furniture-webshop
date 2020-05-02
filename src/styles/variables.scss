@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+$colors: ( primary: #1976D2,
+secondary: #424242,
+accent: #82B1FF,
+error: #FF5252,
+info: #2196F3,
+success: #4CAF50,
+warning: #FFC107);
+body {
+    background-color: #f9f9fc;
+    color: #646c9a;
+    font-family: 'Poppins', sans-serif;
+}
+
+.v-toolbar {
+    box-shadow: 0 0 40px 0 rgba(82, 63, 105, .1) !important;
+}
+
+.v-tabs {
+    font-family: 'Poppins', sans-serif;
+    color: #6c7293;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.v-tab:hover {
+    background: #f5f6fc;
+    color: #591df1;
+    border-bottom-color: #591df1;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.v-tab--active:hover {
+    color: #591df1;
+    border-bottom-color: #591df1;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.v-tab--active:before {
+    background: #f5f6fc;
+    color: #591df1;
+    border-bottom-color: #591df1;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.theme--light.v-tabs>.v-tabs-bar {
+    color: #591df1;
+    border-bottom-color: #591df1;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+a.v-tab--active.v-tab {
+    color: #591df1;
+    border-bottom-color: #591df1;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.theme--light.v-card {
+    display: flex;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    box-shadow: 0 0 13px 0 rgba(82, 63, 105, .05);
+    background-color: #fff;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    width: fit-content;
+    margin: 20px;
+    padding: 20px;
+}
