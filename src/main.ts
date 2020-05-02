@@ -3,6 +3,9 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
+import Inkline from '@inkline/inkline'
+
+Vue.use(Inkline);
 
 Vue.config.productionTip = false
 
