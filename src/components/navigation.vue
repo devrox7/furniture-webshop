@@ -1,6 +1,6 @@
 <template>
 <div>
-<v-navigation-drawer v-model="drawer"  app>
+<v-navigation-drawer v-model='drawer' app>
       <v-list dense>
         <v-list-item link>
           <v-list-item-action>
@@ -21,11 +21,12 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar  >
+    <v-app-bar app >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title> <div>
-<img alt="Vue logo" src='../assets/images/logo.png' style='max-width:70px'>
-</div></v-toolbar-title>
+        <img alt="Vue logo" src='../assets/images/logo.png' style='max-width:70px'>
+        </div>
+      </v-toolbar-title>
    
       <template v-slot:extension>
         <v-tabs align-with-title>
@@ -38,14 +39,20 @@
     </div>
 </template>
 
-<script>
+<script lang='ts'>
 export default{
   data: () => ({
-    drawer: false
+    drawer: false,
   })
 }
+
+// export default class Navigation extends Vue{
+//   drawer = null;
+// }
 </script>
 
 <style lang="scss">
-
+.theme--light.v-app-bar.v-toolbar.v-sheet {
+    background-color: #ffffff !important;
+}
 </style>

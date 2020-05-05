@@ -69,10 +69,12 @@ a.v-tab--active.v-tab {
     -webkit-box-direction: normal;
     flex-direction: column;
     box-shadow: 0 0 13px 0 rgba(82, 63, 105, .05);
-    background-color: #fff;
     margin-bottom: 20px;
     border-radius: 4px;
     width: fit-content;
     margin: 20px;
     padding: 20px;
+    background-color: #ffffff;
+    color: #646c9a;
+    border-bottom: 3px solid rgba(89,29,241,.2);
 }
