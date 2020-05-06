@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
+import Admin from '../views/Admin.vue'
+import Products from '../components/products/Products.vue'
+import Login from '../components/admin/Login.vue'
 
 Vue.use(VueRouter)
 
@@ -9,6 +12,21 @@ Vue.use(VueRouter)
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/admin-panel',
+    name: 'Admin Panel',
+    component: Admin
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/products',
+    name: 'Products',
+    component: Products
   },
   {
     path: '/about',

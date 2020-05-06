@@ -7,9 +7,9 @@ info: #2196F3,
 success: #4CAF50,
 warning: #FFC107);
 body {
-    background-color: #f9f9fc;
-    color: #646c9a;
-    font-family: 'Poppins', sans-serif;
+    background-color: #f9f9fc !important;
+    color: #535b86 !important;
+    font-family: 'Poppins', sans-serif !important;
 }
 
 .v-toolbar {
@@ -68,13 +68,19 @@ a.v-tab--active.v-tab {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     flex-direction: column;
-    box-shadow: 0 0 13px 0 rgba(82, 63, 105, .05);
+    box-shadow: 0 0 13px 0 rgba(82, 63, 105, .05) !important;
     margin-bottom: 20px;
     border-radius: 4px;
     width: fit-content;
-    margin: 20px;
+    margin: 50px;
     padding: 20px;
-    background-color: #ffffff;
-    color: #646c9a;
-    border-bottom: 3px solid rgba(89,29,241,.2);
+    background-color: #ffffff !important;
+    color: #646c9a !important;
+    border-bottom: 3px solid rgba(89,29,241,.2) !important;
+}
+
+.v-application .primary {
+    background-color: #5867dd !important;
+    border-color: #5867dd !important;
+    color: #fff !important;
 }

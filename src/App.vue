@@ -17,14 +17,25 @@
 </template>
 
 <script>
-import navigation from './components/navigation.vue'
+import { Component, Vue } from 'vue-property-decorator';
 
-export default {
-  components:{
-    navigation
-  },
-  name: "App"
-};
+import Navigation from './components/Navigation.vue'
+
+// export default {
+//   components:{
+//     Navigation
+//   },
+//   name: "App"
+// };
+@Component({
+  name: 'App',
+  components: {
+    Navigation
+  }
+})
+export default class App extends Vue{
+
+}
 </script>
 
 <style>
