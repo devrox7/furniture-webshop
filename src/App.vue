@@ -15,18 +15,12 @@
     </v-content>
   </v-app>
 </template>
-
+ 
 <script>
 import { Component, Vue } from 'vue-property-decorator';
 
 import Navigation from './components/Navigation.vue'
 
-// export default {
-//   components:{
-//     Navigation
-//   },
-//   name: "App"
-// };
 @Component({
   name: 'App',
   components: {
