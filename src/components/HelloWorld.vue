@@ -1,6 +1,6 @@
 <template>
 <v-card>
-<h1>hello</h1>
+<h1>Welcome to our furniture shop</h1>
 </v-card>
 </template>
 

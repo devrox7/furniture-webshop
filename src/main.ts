@@ -10,6 +10,8 @@ import "vuetify/dist/vuetify.min.css";
 import firebase from 'firebase';
 import 'firebase/firestore';
 
+export const bus = new Vue();
+
 
 Vue.use(Inkline);
 Vue.use(vuetify);
@@ -26,6 +28,8 @@ const firebaseConfig = {
   appId: "1:301911091711:web:c90b811537d1fbc55d9fca"
 };
 
+
+
 /* eslint-disable no-new */
 new Vue({
   router,
@@ -36,5 +40,6 @@ new Vue({
   firebase.initializeApp(firebaseConfig);
   }
 }).$mount('#app')
+// firebase.initializeApp(firebaseConfig);
 
 export const db = firebase.firestore();

@@ -12,6 +12,10 @@ body {
     font-family: 'Poppins', sans-serif !important;
 }
 
+.v-data-table tbody tr:hover{
+    background: #f9f9fc !important;
+}
+
 .v-toolbar {
     box-shadow: 0 0 40px 0 rgba(82, 63, 105, .1) !important;
 }
@@ -25,38 +29,8 @@ body {
 
 .v-tab:hover {
     background: #f5f6fc;
-    color: #591df1;
-    border-bottom-color: #591df1;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-}
-
-.v-tab--active:hover {
-    color: #591df1;
-    border-bottom-color: #591df1;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-}
-
-.v-tab--active:before {
-    background: #f5f6fc;
-    color: #591df1;
-    border-bottom-color: #591df1;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-    font-family: 'Poppins', sans-serif;
-}
-
-.theme--light.v-tabs>.v-tabs-bar {
-    color: #591df1;
-    border-bottom-color: #591df1;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-}
-
-a.v-tab--active.v-tab {
-    color: #591df1;
-    border-bottom-color: #591df1;
+    color: #5867dd ;
+    border-bottom-color: #5867dd ;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
 }
@@ -69,10 +43,10 @@ a.v-tab--active.v-tab {
     -webkit-box-direction: normal;
     flex-direction: column;
     box-shadow: 0 0 13px 0 rgba(82, 63, 105, .05) !important;
-    margin-bottom: 20px;
     border-radius: 4px;
     width: fit-content;
-    margin: 50px;
+    // margin: 20px;
+    margin-top:20px;
     padding: 20px;
     background-color: #ffffff !important;
     color: #646c9a !important;

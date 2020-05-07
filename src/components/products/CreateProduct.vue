@@ -1,5 +1,9 @@
 <template>
+<v-container>
+    <v-card>
 <h1>create product</h1>
+    </v-card>
+</v-container>
 </template>
 
 <script lang="ts">

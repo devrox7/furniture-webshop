@@ -1,4 +1,5 @@
 <template>
+<v-container>
 <v-card>
         <h1>Login</h1>
 
@@ -44,6 +45,7 @@
     </v-container>
   </v-form>
 </v-card>
+</v-container>
 </template>
 
 <script lang="ts">
@@ -56,7 +58,7 @@ import "firebase/firestore";
 @Component({
     name: 'login'
 })
-export default class HelloWorld extends Vue {
+export default class Login extends Vue {
     email = "";
     password = "";
 
@@ -92,6 +94,6 @@ formIsValid(){
         });
     }
 
-    // signOut(){}
+
 }
 </script>
