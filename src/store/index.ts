@@ -1,32 +1,67 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import firebase from 'firebase'
+import 'firebase/firestore'
+import config from "../../firebase"
 
 Vue.use(Vuex)
+firebase.initializeApp(config);
 
 export default new Vuex.Store({
-  state: {
-    currentUser: null
+  state:{
+  db: firebase.firestore(),
+  user: null
   },
   mutations: {
-    userStatus (state, user) {
-      if(user) {
-        state.currentUser = user
-      }
-      else {
-        state.currentUser = null
-      }
+    setUser(state, payload){
+      state.user = payload
     }
+
+
   },
   actions: {
-    setUser(context, user) {  
-      //  setUser({ commit }, user) {
-          context.commit('userStatus', user)
-          // commit('userStatus', user)
+    signUserIn({commit}, payload){
+      firebase
+      .auth()
+      .signInWithEmailAndPassword(payload.email, payload.password)
+      .then(user => {
+      
+          commit('setUser',user)
+      })
+      .catch(function(error) {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        if (errorCode === "auth/wrong-password") {
+          alert("Wrong password!");
+        } else {
+          alert(errorMessage);
         }
+
+        console.log(error);
+      });
+    },
+    signOut({commit}) {
+      firebase
+        .auth()
+        .signOut()
+        .then(()=> {
+          commit('setUser',null)
+        alert("Logged out!");
+        })
+        .catch(function(error) {
+          console.log(error);
+          // An error happened.
+        });
+    }
+    
   },
   modules: {
   },
   getters:{
-    currentUser: state => state.currentUser
+    user(state){
+      return state.user
+    }
   }
 })

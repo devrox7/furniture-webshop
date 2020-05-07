@@ -41,6 +41,8 @@
     "node_modules"
   ],
   "plugins": [
-    ["transform-react-jsx", { "pragma": "h" }]
+    [ "transform-react-jsx", {
+      "pragma": "h"
+    } ]
   ]
 }

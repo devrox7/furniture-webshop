@@ -1,41 +1,42 @@
 <template>
   <v-app id="app">
-    <navigation/>
-    
+    <navigation />
 
     <v-content>
       <!-- <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
-          <v-col class="text-center"> -->
-            <router-view/>
+      <v-col class="text-center">-->
+      <router-view />
 
-          <!-- </v-col>
+      <!-- </v-col>
         </v-row>
-      </v-container> -->
+      </v-container>-->
     </v-content>
   </v-app>
 </template>
  
 <script>
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue } from "vue-property-decorator";
 
-import Navigation from './components/Navigation.vue'
+import Navigation from "./components/Navigation.vue";
 
 @Component({
-  name: 'App',
+  name: "App",
   components: {
     Navigation
   }
 })
-export default class App extends Vue{
-
+export default class App extends Vue {
+  created() {
+    console.log(this.$store.state.db);
+  }
 }
 </script>
 
 <style>
-main{
-  background-color:#f9f9fc;
+main {
+  background-color: #f9f9fc;
   color: #646c9a;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 </style>
