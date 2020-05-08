@@ -1,6 +1,8 @@
+
+
 <template>
-  <v-container>
-    <v-card style="width: 100%;">
+  <v-card class="mx-auto" style="min-width:90%; margin: 50px">
+    <v-container>
       <v-row justify="end">
         <v-col>
           <h1>Products</h1>
@@ -10,45 +12,40 @@
           <v-btn to="/create-product" color="primary" class="ma-2">Create</v-btn>
         </v-col>
       </v-row>
-      <v-divider></v-divider>
-      <br />
-      <!-- <v-data-table
-    :headers="headers"
-    :items="desserts"
-    :items-per-page="5"
-    class="elevation-1"
-      ></v-data-table>-->
 
-      <v-simple-table>
-        <template v-slot:default>
-          <thead>
-            <tr>
-              <th class="text-left">Name</th>
-              <th class="text-left">Calories</th>
-              <th>Tools</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in desserts" :key="item.name">
-              <td>{{ item.name }}</td>
-              <td>{{ item.calories }}</td>
-              <td>
-                <v-btn icon color="primary">
-                  <v-icon>mdi-pencil-outline</v-icon>
-                </v-btn>
+      <v-row>
+        <v-col cols="12">
+          <v-simple-table>
+            <template v-slot:default>
+              <thead>
+                <tr>
+                  <th class="text-left">Name</th>
+                  <th class="text-left">Calories</th>
+                  <th>Tools</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="item in desserts" :key="item.name">
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.calories }}</td>
+                  <td>
+                    <v-btn icon color="primary">
+                      <v-icon>mdi-pencil-outline</v-icon>
+                    </v-btn>
 
-                <v-btn icon color="primary">
-                  <v-icon>mdi-delete-outline</v-icon>
-                </v-btn>
-              </td>
-            </tr>
-          </tbody>
-        </template>
-      </v-simple-table>
-    </v-card>
-  </v-container>
+                    <v-btn icon color="primary">
+                      <v-icon>mdi-delete-outline</v-icon>
+                    </v-btn>
+                  </td>
+                </tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-card>
 </template>
-
 
 
 <script lang="ts">

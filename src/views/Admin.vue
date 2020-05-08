@@ -1,23 +1,20 @@
 <template>
-<v-container>
-<v-card>
-<h1>ADMIN PANEL</h1>
-
-</v-card>
-</v-container>
+  <v-card class="mx-auto" style="min-width:50%; margin: 50px">
+    <v-container>
+      <h1>ADMIN PANEL</h1>
+      <v-divider></v-divider>
+      <v-row>
+        <v-col cols="12" sm="12" md="12" lg="12" xl="12">Here you can edit your company details.</v-col>
+      </v-row>
+    </v-container>
+  </v-card>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-// import {dbProducts} from '../../firebase.js';
-// import {dbRooms} from '../../firebase.js';
-// import {db} from '../../firebase.js';
+import { Component, Vue } from "vue-property-decorator";
 
 @Component({
-    name: "Admin"
+  name: "Admin"
 })
-export default class Admin extends Vue {
-
-
-}
+export default class Admin extends Vue {}
 </script>

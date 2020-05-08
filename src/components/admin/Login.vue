@@ -1,55 +1,55 @@
 <template>
-  <v-container>
-    <v-card>
-      <h1>Login</h1>
+  <v-card class="mx-auto" style="min-width:50%; margin: 50px">
+    <v-container>
+      <h1>Create Product</h1>
+      <v-divider></v-divider>
+      <v-row>
+        <v-col cols="12" sm="6" md="6" lg="4" xl="4">
+          <app-alert v-if="error" @dismissed="onDismissed" :text="error.message"></app-alert>
+          <v-form @submit.prevent="signIn()">
+            <v-text-field v-model="email" label="Email" required></v-text-field>
 
-      <v-form @submit.prevent="signIn()">
-        <v-container>
-          <v-row>
-            <v-col cols="12" md="4">
-              <v-text-field v-model="email" label="Email" required></v-text-field>
-            </v-col>
-            <br />
-            <v-col cols="12" md="4">
-              <v-text-field
-                v-model="password"
-                label="Password"
-                required
-                :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                :type="show1 ? 'text' : 'password'"
-                @click:append="show1 = !show1"
-              ></v-text-field>
-            </v-col>
-            <br />
+            <v-text-field
+              v-model="password"
+              label="Password"
+              required
+              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="show1 ? 'text' : 'password'"
+              @click:append="show1 = !show1"
+            ></v-text-field>
 
-            <v-col cols="12" md="4">
-              <div class="my-2">
-                <v-btn
-                  @click.prevent="signIn()"
-                  :disabled="!formIsValid"
-                  depressed
-                  color="primary"
-                >LOG IN</v-btn>
-              </div>
-            </v-col>
-
-            <hr />
-            <v-col>
-              <p>
-                email:
-                <b>admin@admin.dk</b>
-              </p>
-              <p>
-                password:
-                <b>123456</b>
-              </p>
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-form>
-    </v-card>
-  </v-container>
+            <v-btn
+              type="submit"
+              depressed
+              color="primary"
+              :disabled="loading && !formIsValid"
+              :loading="loading"
+            >
+              LOG IN
+              <span v-if="loading" class="custom-loader">
+                <v-icon light>cached</v-icon>
+              </span>
+            </v-btn>
+          </v-form>
+        </v-col>
+        <v-col>
+          <div class="ma-10">
+            <p>
+              email:
+              <b>admin@admin.dk</b>
+            </p>
+            <p>
+              password:
+              <b>123456</b>
+            </p>
+          </div>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-card>
 </template>
+
+
 
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator";
@@ -73,19 +73,19 @@ export default class Login extends Vue {
     return this.$store.getters.user;
   }
 
+  get error() {
+    return this.$store.getters.error;
+  }
+
+  get loading() {
+    return this.$store.getters.loading;
+  }
+
   @Watch("user")
   userChanged(user) {
     if (user !== null && user !== undefined) {
-      console.log(user);
-      console.log("1");
       this.$router.push("/products");
     }
-
-    // if (user == null) {
-    //   console.log(user);
-    //   console.log("2");
-    //   this.$router.replace("/");
-    // }
   }
 
   signIn() {
@@ -93,6 +93,11 @@ export default class Login extends Vue {
       email: this.email,
       password: this.password
     });
+  }
+
+  onDismissed() {
+    console.log("error");
+    this.$store.dispatch("clearError");
   }
 }
 </script>

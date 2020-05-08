@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-$colors: ( primary: #1976D2,
+$colors: (primary: #1976D2,
 secondary: #424242,
 accent: #82B1FF,
 error: #FF5252,
@@ -12,7 +12,7 @@ body {
     font-family: 'Poppins', sans-serif !important;
 }
 
-.v-data-table tbody tr:hover{
+.v-data-table tbody tr:hover {
     background: #f9f9fc !important;
 }
 
@@ -29,8 +29,8 @@ body {
 
 .v-tab:hover {
     background: #f5f6fc;
-    color: #5867dd ;
-    border-bottom-color: #5867dd ;
+    color: #5867dd;
+    border-bottom-color: #5867dd;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
 }
@@ -46,15 +46,56 @@ body {
     border-radius: 4px;
     width: fit-content;
     // margin: 20px;
-    margin-top:20px;
+    margin-top: 20px;
     padding: 20px;
     background-color: #ffffff !important;
     color: #646c9a !important;
-    border-bottom: 3px solid rgba(89,29,241,.2) !important;
+    border-bottom: 3px solid rgba(89, 29, 241, .2) !important;
 }
 
 .v-application .primary {
     background-color: #5867dd !important;
     border-color: #5867dd !important;
     color: #fff !important;
+}
+
+.custom-loader {
+    animation: loader 1s infinite;
+    display: flex;
+}
+
+@-moz-keyframes loader {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes loader {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@-o-keyframes loader {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes loader {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

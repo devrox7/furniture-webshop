@@ -24,6 +24,14 @@
               <v-list-item-title>Products</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+          <v-list-item link disabled>
+            <v-list-item-action>
+              <v-icon>mdi-text-box</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Orders</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
         </v-list>
         <v-btn
           align="end"
@@ -34,7 +42,7 @@
       </v-navigation-drawer>
     </div>
     <v-app-bar app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon v-if="userIsAuthenticated" @click.stop="drawer = !drawer" />
       <v-toolbar-title>
         <v-row>
           <!-- <img alt="Vue logo" src='../assets/images/logo.png' style='max-width:70px'> -->
@@ -72,13 +80,10 @@ import store from "../store/index";
 
 @Component
 export default class Navigation extends Vue {
-  drawer;
+  drawer = false;
 
   constructor() {
     super();
-    if (this.userIsAuthenticated) {
-      this.drawer = true;
-    }
   }
 
   get userIsAuthenticated() {
