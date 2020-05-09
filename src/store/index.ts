@@ -14,7 +14,8 @@ export default new Vuex.Store({
   user: null,
   loading: false,
   error: null,
-  roomTypes: []
+  roomTypes: [],
+  products: []
   },
 
 // MUTATIONS ----------------------------------------------------------------------
@@ -38,6 +39,10 @@ export default new Vuex.Store({
     setRoomTypes(state, payload){
       state.roomTypes = payload
 
+    },
+
+    createProduct(state, payload){
+      state.products.push(payload)
     }
 
   },
@@ -59,7 +64,7 @@ export default new Vuex.Store({
       commit('setError', error)
 
         console.log(error);
-      });
+      })
     },
 
     signOut({commit}) {
@@ -100,8 +105,7 @@ export default new Vuex.Store({
 
     createProduct({commit}, payload){
         const product = {
-          category: payload.category,
-          code: payload.code,
+          roomsType: payload.roomsType,
           color: payload.color,
           description: payload.description,
           discount: payload.discount,
@@ -112,8 +116,12 @@ export default new Vuex.Store({
         }
         firebase.firestore().collection('Products').doc().set(product)
         .then((data)=>{
+          const key = data.key
             console.log(data)
-            commit('CreateProduct', product)
+            commit('CreateProduct',{
+              ...product,
+              id:key
+            })
 
         }).catch((error)=>{
           console.log(error)
@@ -138,9 +146,10 @@ export default new Vuex.Store({
     error(state){
       return state.error
     },
-    db(state){
-      return state.db
-
+    products(state){
+      console.log(state.products);
+      return state.products
+      
     }
 
   }

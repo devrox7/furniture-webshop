@@ -84,6 +84,12 @@ export default class Navigation extends Vue {
 
   constructor() {
     super();
+
+    if (this.userIsAuthenticated) {
+      this.drawer = true;
+    } else {
+      this.drawer = false;
+    }
   }
 
   get userIsAuthenticated() {
@@ -102,7 +108,7 @@ export default class Navigation extends Vue {
 
 
 
-<style lang="scss">
+<style lang="scss" scoped>
 .nav-head {
   font-family: "Poppins", sans-serif !important;
   text-align: center;

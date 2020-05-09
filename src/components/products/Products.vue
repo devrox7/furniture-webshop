@@ -1,7 +1,7 @@
 
 
 <template>
-  <v-card class="mx-auto" style="min-width:90%; margin: 50px">
+  <v-card class="mx-auto" style="min-width:70%; margin: 50px">
     <v-container>
       <v-row justify="end">
         <v-col>
@@ -27,7 +27,7 @@
               <tbody>
                 <tr v-for="item in desserts" :key="item.name">
                   <td>{{ item.name }}</td>
-                  <td>{{ item.calories }}</td>
+                  <td>{{ item.price }}</td>
                   <td>
                     <v-btn icon color="primary">
                       <v-icon>mdi-pencil-outline</v-icon>
@@ -62,86 +62,86 @@ import CreateProduct from "./CreateProduct.vue";
 })
 export default class Products extends Vue {
   desserts = [
-    {
-      name: "Frozen Yogurt",
-      calories: 159,
-      fat: 6.0,
-      carbs: 24,
-      protein: 4.0,
-      iron: "1%"
-    },
-    {
-      name: "Ice cream sandwich",
-      calories: 237,
-      fat: 9.0,
-      carbs: 37,
-      protein: 4.3,
-      iron: "1%"
-    },
-    {
-      name: "Eclair",
-      calories: 262,
-      fat: 16.0,
-      carbs: 23,
-      protein: 6.0,
-      iron: "7%"
-    },
-    {
-      name: "Cupcake",
-      calories: 305,
-      fat: 3.7,
-      carbs: 67,
-      protein: 4.3,
-      iron: "8%"
-    },
-    {
-      name: "Gingerbread",
-      calories: 356,
-      fat: 16.0,
-      carbs: 49,
-      protein: 3.9,
-      iron: "16%"
-    },
-    {
-      name: "Jelly bean",
-      calories: 375,
-      fat: 0.0,
-      carbs: 94,
-      protein: 0.0,
-      iron: "0%"
-    },
-    {
-      name: "Lollipop",
-      calories: 392,
-      fat: 0.2,
-      carbs: 98,
-      protein: 0,
-      iron: "2%"
-    },
-    {
-      name: "Honeycomb",
-      calories: 408,
-      fat: 3.2,
-      carbs: 87,
-      protein: 6.5,
-      iron: "45%"
-    },
-    {
-      name: "Donut",
-      calories: 452,
-      fat: 25.0,
-      carbs: 51,
-      protein: 4.9,
-      iron: "22%"
-    },
-    {
-      name: "KitKat",
-      calories: 518,
-      fat: 26.0,
-      carbs: 65,
-      protein: 7,
-      iron: "6%"
-    }
+    // {
+    //   name: "Frozen Yogurt",
+    //   calories: 159,
+    //   fat: 6.0,
+    //   carbs: 24,
+    //   protein: 4.0,
+    //   iron: "1%"
+    // },
+    // {
+    //   name: "Ice cream sandwich",
+    //   calories: 237,
+    //   fat: 9.0,
+    //   carbs: 37,
+    //   protein: 4.3,
+    //   iron: "1%"
+    // },
+    // {
+    //   name: "Eclair",
+    //   calories: 262,
+    //   fat: 16.0,
+    //   carbs: 23,
+    //   protein: 6.0,
+    //   iron: "7%"
+    // },
+    // {
+    //   name: "Cupcake",
+    //   calories: 305,
+    //   fat: 3.7,
+    //   carbs: 67,
+    //   protein: 4.3,
+    //   iron: "8%"
+    // },
+    // {
+    //   name: "Gingerbread",
+    //   calories: 356,
+    //   fat: 16.0,
+    //   carbs: 49,
+    //   protein: 3.9,
+    //   iron: "16%"
+    // },
+    // {
+    //   name: "Jelly bean",
+    //   calories: 375,
+    //   fat: 0.0,
+    //   carbs: 94,
+    //   protein: 0.0,
+    //   iron: "0%"
+    // },
+    // {
+    //   name: "Lollipop",
+    //   calories: 392,
+    //   fat: 0.2,
+    //   carbs: 98,
+    //   protein: 0,
+    //   iron: "2%"
+    // },
+    // {
+    //   name: "Honeycomb",
+    //   calories: 408,
+    //   fat: 3.2,
+    //   carbs: 87,
+    //   protein: 6.5,
+    //   iron: "45%"
+    // },
+    // {
+    //   name: "Donut",
+    //   calories: 452,
+    //   fat: 25.0,
+    //   carbs: 51,
+    //   protein: 4.9,
+    //   iron: "22%"
+    // },
+    // {
+    //   name: "KitKat",
+    //   calories: 518,
+    //   fat: 26.0,
+    //   carbs: 65,
+    //   protein: 7,
+    //   iron: "6%"
+    // }
   ];
 
   allProducts = [];
@@ -150,31 +150,16 @@ export default class Products extends Vue {
     super();
 
     // this.getProducts();
-    this.desserts;
+    this.desserts = this.products;
   }
 
-  get db() {
-    return this.$store.state.db;
+  get products() {
+    return this.$store.getters.products;
   }
-  // getProducts() {
-  //   this.db
-  //     .collection("Products")
-  //     .get()
-  //     .then(products => {
-  //       products.forEach(product => {
-  //         this.allProducts.push(product);
-  //         console.log(this.allProducts);
-  //         console.log("prductsss");
-  //       });
-  //     })
-  //     .catch(function(error: Error) {
-  //       console.log("Error getting document:", error);
-  //     });
-  // }
 }
 </script>
 
-<style>
+<style scoped>
 .v-toolbar__content {
   max-height: 64px !important;
 }
