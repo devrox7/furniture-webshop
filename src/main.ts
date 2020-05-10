@@ -8,7 +8,8 @@ import vuetify from './plugins/vuetify';
 import "vuetify/dist/vuetify.min.css";
 import Alert from "./components/shared/Alert.vue";
 
-
+import firebase from 'firebase'
+import 'firebase/firestore'
 
 
 Vue.use(Inkline);
@@ -25,9 +26,11 @@ new Vue({
   vuetify,
   render: h => h(App),
   created(){
-
-
-    this.$store.dispatch('getProducts');
+    firebase.auth().onAuthStateChanged((user)=>{
+      if(user){
+        this.$store.dispatch('autoSignIn', user)
+      }
+    })
   }
 }).$mount('#app')
 // firebase.initializeApp(firebaseConfig);

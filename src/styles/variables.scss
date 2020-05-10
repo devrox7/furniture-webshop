@@ -100,7 +100,7 @@ body {
     }
 }
 
-@keyframes contentVieEnters {
+@keyframes contentViewEnters {
     0% {
         -webkit-transform: translateY(3%);
         transform: translateY(3%);
@@ -123,14 +123,14 @@ body {
 }
 
 .content-view {
-    -webkit-animation: contentVieEnters 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
-    animation: contentVieEnters 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
-    text-align: center;
-    border: 1px solid #d7dbdb;
-    border-radius: 3px;
+    -webkit-animation: contentViewEnters 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
+    animation: contentViewEnters 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
+    // text-align: center;
+    // border: 1px solid #d7dbdb;
+    // border-radius: 3px;
     border: 0px;
 }
 
 .container-content {
-    animation: fadeIN 1.4s;
+    animation: fadeIN 0.6s;
 }

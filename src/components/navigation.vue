@@ -92,6 +92,10 @@ export default class Navigation extends Vue {
     }
   }
 
+  // get admin() {
+  //   return this.$store.getters.user;
+  // }
+
   get userIsAuthenticated() {
     return (
       this.$store.getters.user !== null &&

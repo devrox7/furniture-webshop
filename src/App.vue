@@ -6,6 +6,7 @@
       <!-- <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
       <v-col class="text-center">-->
+
       <router-view />
 
       <!-- </v-col>
@@ -26,8 +27,7 @@ import Navigation from "./components/Navigation.vue";
     Navigation
   }
 })
-export default class App extends Vue {
-}
+export default class App extends Vue {}
 </script>
 
 <style>

@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import firebase from 'firebase'
 import 'firebase/firestore'
 import config from "../../firebase"
+import router from '@/router'
 
 Vue.use(Vuex)
 firebase.initializeApp(config);
@@ -13,7 +14,7 @@ export default new Vuex.Store({
   user: null,
   loading: false,
   error: null,
-  roomTypes: [],
+  roomsType: [],
   products: []
   },
 
@@ -35,19 +36,20 @@ export default new Vuex.Store({
       state.error = null
     },
 
-    setRoomTypes(state, payload){
-      state.roomTypes = payload
+    setRoomsType(state, payload){
+      state.roomsType = payload
 
     },
 
     getProducts(state, payload){
       state.products = payload
     },
-    CreateProduct(state, payload){
-      state.products.push(payload)
+
+    deleteProduct(state, payload){
+      // var data = []
+      state.products.filter(item => item !== payload)
+
     }
-
-
   },
 
 // ACTIONS ------------------------------------------------------------------------
@@ -82,29 +84,36 @@ export default new Vuex.Store({
           console.log(error);
           // An error happened.
         });
+      // firebase.auth().signOut()
+      //   alert("Logged out!");
+      //   commit('setUser', null)
+        
     },
 
     clearError({commit}){
       commit('clearError')
     },
 
-    // getRoomTypes(){
-    //   firebase.firestore().collection("Room Type")
-    //         .get()
-    //         .then(rooms => {
-    //           const roomsType =[]
+    getRoomsType({commit}){
+      const roomsType = firebase.firestore().collection("Room Type");
 
-    //           rooms.forEach(room => {
-    //             roomsType.push(room)
+
+      roomsType.get().then(rooms => {
+              const roomsType =[]
+
+              rooms.forEach(room => {
+                roomsType.push(room.id)
                 
-    //           })
-    //           commit('setRoomTypes', roomsType)
+              })
+              commit('setRoomsType', roomsType)
                 
-    //         })
-    //         .catch(function(error: Error) {
-    //           console.log("Error getting document:", error);
-    //         });
-    // },
+            })
+            .catch(function(error: Error) {
+              console.log("Error getting document:", error);
+            });
+
+      
+    },
 
     createProduct({commit}, payload){
         const product = {
@@ -122,10 +131,10 @@ export default new Vuex.Store({
         .then(()=>{
           const key = doc.id
             console.log(key)
-            commit('CreateProduct',{
-              ...product,
-              id:key
-            })
+            // commit('CreateProduct',{
+            //   ...product,
+            //   id:key
+            // })
 
         }).catch((error)=>{
           console.log(error)
@@ -138,10 +147,16 @@ export default new Vuex.Store({
 
         products.get().then((snapshot) => {
             if (snapshot.docs) {
+              
                 const products = []
                 snapshot.docs.forEach(doc => {
-                  products.push(doc.data())
-                  console.log(doc.data())
+                  const id = doc.id
+
+                  const data = {id:id, data: doc.data() }
+                  // data.push(id)
+                  // data.push(doc.data())
+                  products.push(data)
+                  // console.log(doc.data())
                 });
                 commit('getProducts', products)
                 commit('setLoading',false)
@@ -158,8 +173,19 @@ export default new Vuex.Store({
             commit('setLoading',false)
 
         });
-
-       
+    },
+    deleteProduct({commit}, payload){
+      const product = firebase.firestore().collection("Products");
+      
+      product.doc(payload).delete().then(function() {
+        console.log("Document successfully deleted!");
+        commit('deleteProduct', payload)
+    }).catch(function(error) {
+        console.error("Error removing document: ", error);
+    })
+    },
+    autoSignIn({commit}, payload){
+      commit('setUser', {id: payload.uid, products: []})
     }
 
     
@@ -175,14 +201,21 @@ export default new Vuex.Store({
       return state.user
     },
     loading(state){
+      console.log(state.loading)
+
       return state.loading
     },
     error(state){
       return state.error
     },
     products(state){
-      return state.products
       console.log(state.products)
+      return state.products
+    },
+    roomsType(state){
+      console.log(state.roomsType)
+
+      return state.roomsType
     }
 
   }

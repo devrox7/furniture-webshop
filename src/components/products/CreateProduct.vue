@@ -1,63 +1,67 @@
 <template>
-  <v-card class="mx-auto" style="min-width:50%; margin: 50px">
-    <v-container>
-      <h1>Create Product</h1>
-      <v-divider></v-divider>
-      <v-row class="ma-2">
-        <v-col cols="12" sm="6" md="6" lg="4" xl="4">
-          <v-form @submit.prevent="onCreateProduct">
-            <v-text-field name="name" label="Product Name" id="name" v-model="name" required></v-text-field>
-            <v-text-field name="price" label="Price" id="price" v-model="price" required></v-text-field>
-            <v-text-field
-              name="description"
-              label="Description"
-              id="description"
-              v-model="description"
-              required
-            ></v-text-field>
-            <v-text-field name="disount" label="Disount" id="disount" v-model="discount"></v-text-field>
-            <v-text-field name="size" label="Size" id="size" v-model="size"></v-text-field>
-            <v-text-field name="image" label="Image" id="image" v-model="image"></v-text-field>
-            <!-- <v-file-input name="image" label="Image" id="image" required></v-file-input> -->
+  <div class="container-content">
+    <div class="content-view">
+      <v-card class="mx-auto" style="min-width:50%; margin: 50px">
+        <v-container>
+          <h1>Create Product</h1>
+          <v-divider></v-divider>
+          <v-row class="ma-2">
+            <v-col cols="12" sm="6" md="6" lg="6" xl="6">
+              <v-form @submit.prevent="onCreateProduct">
+                <v-text-field name="name" label="Product Name" id="name" v-model="name" required></v-text-field>
+                <v-text-field name="price" label="Price" id="price" v-model="price" required></v-text-field>
+                <v-text-field
+                  name="description"
+                  label="Description"
+                  id="description"
+                  v-model="description"
+                  required
+                ></v-text-field>
+                <v-text-field name="disount" label="Disount" id="disount" v-model="discount"></v-text-field>
+                <v-text-field name="size" label="Size" id="size" v-model="size"></v-text-field>
+                <v-text-field name="image" label="Image" id="image" v-model="image"></v-text-field>
+                <!-- <v-file-input name="image" label="Image" id="image" required></v-file-input> -->
 
-            <v-autocomplete
-              :items="colors"
-              id="color"
-              item-text="name"
-              dense
-              chips
-              label="Colors"
-              multiple
-              return-object
-              v-model="color"
-            ></v-autocomplete>
-            <v-select
-              required
-              multiple
-              attach
-              chips
-              :items="rooms"
-              item-text="name"
-              label="Room Type"
-              color="purple darken-3"
-              return-object
-              v-model="roomsType"
-            ></v-select>
+                <v-autocomplete
+                  :items="colors"
+                  id="color"
+                  item-text="name"
+                  dense
+                  chips
+                  label="Colors"
+                  multiple
+                  return-object
+                  v-model="color"
+                ></v-autocomplete>
+                <v-select
+                  required
+                  multiple
+                  attach
+                  chips
+                  :items="rooms"
+                  item-text="name"
+                  label="Room Type"
+                  color="purple darken-3"
+                  return-object
+                  v-model="roomsType"
+                ></v-select>
 
-            <v-btn :disabled="!formIsValid" color="primary" class="ma-2" type="submit">Create</v-btn>
-          </v-form>
-        </v-col>
+                <v-btn :disabled="!formIsValid" color="primary" class="ma-2" type="submit">Create</v-btn>
+              </v-form>
+            </v-col>
 
-        <v-col class="d-flex justify-center">
-          <img :src="image" height="400px" />
-        </v-col>
-      </v-row>
-      <v-divider></v-divider>
-      <v-btn to="/products" text small color="primary" class="mt-4">
-        <v-icon>mdi-arrow-left-bold-circle-outline</v-icon>&nbsp; &nbsp;back to products
-      </v-btn>
-    </v-container>
-  </v-card>
+            <v-col class="d-flex justify-center">
+              <img :src="image" height="400px" />
+            </v-col>
+          </v-row>
+          <v-divider></v-divider>
+          <v-btn to="/products" text small color="primary" class="mt-4">
+            <v-icon>mdi-arrow-left-bold-circle-outline</v-icon>&nbsp; &nbsp;back to products
+          </v-btn>
+        </v-container>
+      </v-card>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -81,40 +85,26 @@ export default class CreateProduct extends Vue {
   roomsType = "";
   image = "";
 
-  rooms = [
-    { name: "Living Room" },
-    { name: "Bedroom" },
-    { name: "Kitchen" },
-    { name: "Dinning Room" },
-    { name: "Office" },
-    { name: "Bathroom" }
-  ];
-
   colors = [
-    { name: "White" },
-    { name: "Black" },
-    { name: "Burgundy" },
-    { name: "Green" },
-    { name: "Yellow" },
-    { name: "Purple" },
-    { name: "Navy blue" },
-    { name: "Red" },
-    { name: "Orange" },
-    { name: "Brown" },
-    { name: "Bej" }
+    "White",
+    "Black",
+    "Burgundy",
+    "Green",
+    "Yellow",
+    "Purple",
+    "Navy blue",
+    "Red",
+    "Orange",
+    "Brown",
+    "Bej"
   ];
 
-  // categories: [
-  //         { name: "Continental Bed" },
-  //         { name: "Wardrobe" },
-  //         { name: "Dresser" },
-  //         { name: "Guest Bed" },
-  //         { name: "Bedside Table" },
-  //         { name: "Bed Frame" },
-  //         { name: "Mirror" }
-  // ]
   constructor() {
     super();
+  }
+
+  beforeCreate() {
+    this.$store.dispatch("getRoomsType");
   }
 
   get formIsValid() {
@@ -127,8 +117,12 @@ export default class CreateProduct extends Vue {
     );
   }
 
+  get rooms() {
+    return this.$store.getters.roomsType;
+  }
+
   onCreateProduct() {
-    debugger;
+    // debugger;
 
     if (!this.formIsValid) {
       return;

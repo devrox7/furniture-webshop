@@ -7,6 +7,7 @@ import CreateProduct from '../components/products/CreateProduct.vue'
 import Login from '../components/admin/Login.vue'
 import firebase from 'firebase';
 import "firebase/firestore";
+import AuthGuard from './auth-guard';
 
 Vue.use(VueRouter)
 
@@ -20,9 +21,10 @@ Vue.use(VueRouter)
     path: '/admin-panel',
     name: 'Admin Panel',
     component: Admin,
-    meta: {
-      requiresAuth: true
-    }
+    // meta: {
+    //   requiresAuth: true
+    // }
+    beforeEnter:AuthGuard
   },
   {
     path: '/login',
@@ -33,17 +35,21 @@ Vue.use(VueRouter)
     path: '/products',
     name: 'Products',
     component: Products,
-    meta: {
-      requiresAuth: true
-    }
+    // meta: {
+    //   requiresAuth: true
+    // }
+    beforeEnter:AuthGuard
+
   },
   {
     path: '/create-product',
     name: 'Create Product',
     component: CreateProduct,
-    meta: {
-      requiresAuth: true
-    }
+    // meta: {
+    //   requiresAuth: true
+    // }
+    beforeEnter:AuthGuard
+
   },
   {
     path: '/about',
@@ -61,14 +67,14 @@ const router = new VueRouter({
 
 
 
-router.beforeEach((to, from, next) => {
-  const currentUser = firebase.auth().currentUser;
-  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+// router.beforeEach((to, from, next) => {
+//   const currentUser = firebase.auth().currentUser;
+//   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
 
-  if(requiresAuth && !currentUser) next('login');
-  else next();
-  // if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
-  // else next()
-});
+//   if(requiresAuth && !currentUser) next('login');
+//   else next();
+//   // if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
+//   // else next()
+// });
 
 export default router

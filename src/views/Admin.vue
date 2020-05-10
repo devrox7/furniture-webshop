@@ -1,4 +1,6 @@
 <template>
+<div class="container-content">
+    <div class="content-view">
   <v-card class="mx-auto" style="min-width:50%; margin: 50px">
     <v-container>
       <h1>ADMIN PANEL</h1>
@@ -8,6 +10,8 @@
       </v-row>
     </v-container>
   </v-card>
+  </div>
+  </div>
 </template>
 
 <script lang="ts">

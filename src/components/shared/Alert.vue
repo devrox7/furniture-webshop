@@ -1,4 +1,6 @@
 <template>
+<div class="container-content">
+    <div class="content-view">
   <v-alert
     dense
     outlined
@@ -9,6 +11,8 @@
     @input="onClose"
     :value="true"
   >{{text}}</v-alert>
+  </div>
+  </div>
 </template>
 
 <script lang='ts'>
