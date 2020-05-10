@@ -10,7 +10,6 @@ firebase.initializeApp(config);
 export default new Vuex.Store({
   // STATE ----------------------------------------------------------------------
   state:{
-  db: firebase.firestore(),
   user: null,
   loading: false,
   error: null,
@@ -41,9 +40,13 @@ export default new Vuex.Store({
 
     },
 
-    createProduct(state, payload){
+    getProducts(state, payload){
+      state.products = payload
+    },
+    CreateProduct(state, payload){
       state.products.push(payload)
     }
+
 
   },
 
@@ -114,10 +117,11 @@ export default new Vuex.Store({
           price: payload.price,
           size: payload.size
         }
-        firebase.firestore().collection('Products').doc().set(product)
-        .then((data)=>{
-          const key = data.key
-            console.log(data)
+        const doc = firebase.firestore().collection('Products').doc()
+        doc.set(product)
+        .then(()=>{
+          const key = doc.id
+            console.log(key)
             commit('CreateProduct',{
               ...product,
               id:key
@@ -126,6 +130,36 @@ export default new Vuex.Store({
         }).catch((error)=>{
           console.log(error)
         })
+    },
+
+     getProducts({commit}){
+      commit('setLoading',true)
+        const products = firebase.firestore().collection("Products");
+
+        products.get().then((snapshot) => {
+            if (snapshot.docs) {
+                const products = []
+                snapshot.docs.forEach(doc => {
+                  products.push(doc.data())
+                  console.log(doc.data())
+                });
+                commit('getProducts', products)
+                commit('setLoading',false)
+
+
+            } else {
+
+                console.log("No documents!");
+                commit('setLoading',false)
+
+            }
+        }).catch(function(error) {
+            console.log("Error getting documents:", error);
+            commit('setLoading',false)
+
+        });
+
+       
     }
 
     
@@ -147,9 +181,8 @@ export default new Vuex.Store({
       return state.error
     },
     products(state){
-      console.log(state.products);
       return state.products
-      
+      console.log(state.products)
     }
 
   }

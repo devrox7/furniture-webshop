@@ -9,6 +9,8 @@ import "vuetify/dist/vuetify.min.css";
 import Alert from "./components/shared/Alert.vue";
 
 
+
+
 Vue.use(Inkline);
 Vue.use(vuetify);
 
@@ -21,7 +23,12 @@ new Vue({
   router,
   store,
   vuetify,
-  render: h => h(App)
+  render: h => h(App),
+  created(){
+
+
+    this.$store.dispatch('getProducts');
+  }
 }).$mount('#app')
 // firebase.initializeApp(firebaseConfig);
 

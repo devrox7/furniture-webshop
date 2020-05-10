@@ -99,3 +99,38 @@ body {
         transform: rotate(360deg);
     }
 }
+
+@keyframes contentVieEnters {
+    0% {
+        -webkit-transform: translateY(3%);
+        transform: translateY(3%);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: translateX(0%);
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIN {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.content-view {
+    -webkit-animation: contentVieEnters 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
+    animation: contentVieEnters 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
+    text-align: center;
+    border: 1px solid #d7dbdb;
+    border-radius: 3px;
+    border: 0px;
+}
+
+.container-content {
+    animation: fadeIN 1.4s;
+}

@@ -27,9 +27,6 @@ import Navigation from "./components/Navigation.vue";
   }
 })
 export default class App extends Vue {
-  created() {
-    console.log(this.$store.state.db);
-  }
 }
 </script>
 
