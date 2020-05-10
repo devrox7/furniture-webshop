@@ -51,19 +51,19 @@
             xl="4"
           >
             <v-card class="mx-auto">
-              <div :v-for="product in products" :key="product.name">
+              <div :v-for="product in products" :key="product.id">
                 <v-img
                   class="white--text align-end"
                   max-height="300"
                   aspect-ratio="2"
-                  :src="product.image"
+                  :src="product.data.image"
                 ></v-img>
-                <v-card-title>{{product.name}}</v-card-title>
+                <v-card-title>{{product.data.name}}</v-card-title>
 
-                <v-card-subtitle class="pb-0">{{product.price}} kr</v-card-subtitle>
+                <v-card-subtitle class="pb-0">{{product.data.price}} kr</v-card-subtitle>
 
                 <v-card-text class="text--primary">
-                  <div>{{product.description}}</div>
+                  <div>{{product.data.description}}</div>
                 </v-card-text>
 
                 <v-card-actions>
