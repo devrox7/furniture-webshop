@@ -43,7 +43,13 @@
                         <div v-if="!product.data.discount">
                           <i>None</i>
                         </div>
-                        {{ product.data.discount }}
+                        {{ product.data.discount }} %
+                        <v-tooltip left>
+                          <template v-slot:activator="{ on }">
+                            <v-icon v-on="on" v-if="product.data.discount" color="orange">mdi-star</v-icon>
+                          </template>
+                          <span>Product has discount applied.</span>
+                        </v-tooltip>
                       </td>
                       <td>{{ product.data.size }}</td>
 
@@ -113,13 +119,13 @@
                     v-model="editableProduct.price"
                     required
                   ></v-text-field>
-                  <v-text-field
+                  <v-textarea
                     name="description"
                     label="Description"
                     id="description"
                     v-model="editableProduct.description"
                     required
-                  ></v-text-field>
+                  ></v-textarea>
                   <v-text-field
                     name="disount"
                     label="Disount"

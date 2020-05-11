@@ -23,13 +23,13 @@
                   v-model="product.price"
                   required
                 ></v-text-field>
-                <v-text-field
+                <v-textarea
                   name="description"
                   label="Description"
                   id="description"
                   v-model="product.description"
                   required
-                ></v-text-field>
+                ></v-textarea>
                 <v-text-field
                   append-icon="%"
                   type="number"
@@ -40,7 +40,15 @@
                 ></v-text-field>
                 <v-text-field name="size" label="Size" id="size" v-model="product.size"></v-text-field>
                 <v-text-field name="image" label="Image" id="image" v-model="product.image"></v-text-field>
-                <!-- <v-file-input name="image" label="Image" id="image" required></v-file-input> -->
+                <!-- <v-file-input
+                  name="image"
+                  label="Image"
+                  id="image"
+                  ref="file-input"
+                  accept="image/*"
+                  v-model="product.image"
+                  required
+                ></v-file-input>-->
 
                 <v-autocomplete
                   :items="colors"
@@ -139,6 +147,9 @@ export default class CreateProduct extends Vue {
     // debugger;
 
     if (!this.formIsValid) {
+      return;
+    }
+    if (!this.product.image) {
       return;
     }
     // debugger;

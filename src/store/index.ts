@@ -117,6 +117,9 @@ export default new Vuex.Store({
 
     createProduct({commit}, payload){
       // debugger;
+      // if(payload.image.name.lastIndexOf('.')<=0){
+      //   return alert("Please add a valid file!")
+      // }
         const product = {
           roomsType: payload.roomsType,
           color: payload.color,
@@ -127,18 +130,26 @@ export default new Vuex.Store({
           price: payload.price,
           size: payload.size
         }
+        let imageUrl;
+        let key;
         
         const products = firebase.firestore().collection('Products').doc()
         products.set(product)
         .then(()=>{
-          // const key = doc.id
-          //   console.log(key)
-            // commit('CreateProduct',{
-            //   ...product,
-            //   id:key
-            // })
-
-        }).catch((error)=>{
+           key = products.id
+          return key})
+        //   .then(key=>{
+        //   debugger
+        //   const filename = payload.image.name;
+        //     const storageRef = firebase.storage().ref();
+        //   return storageRef.put(filename)
+  
+        //   }).then(snapshot=>{
+        //     debugger
+        //     imageUrl= snapshot.metadata.downloadURLs[0]
+        //     return firebase.firestore().collection('Products').doc(key).update({image:imageUrl})
+        // })
+        .catch((error)=>{
           console.log(error)
         })
     },
@@ -176,7 +187,7 @@ export default new Vuex.Store({
 
     deleteProduct({commit}, payload){
       const products = firebase.firestore().collection("Products");
-     debugger;
+    //  debugger;
       products.doc(payload).delete().then(function() {
         console.log("Document successfully updated!");
         commit('deleteProduct', payload)

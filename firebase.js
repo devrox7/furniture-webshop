@@ -7,7 +7,7 @@ const config = {
     authDomain: "furniture-webshop.firebaseapp.com",
     databaseURL: "https://furniture-webshop.firebaseio.com",
     projectId: "furniture-webshop",
-    storageBucket: "furniture-webshop.appspot.com",
+    storageBucket: "gs://furniture-webshop.appspot.com",
     messagingSenderId: "301911091711",
     appId: "1:301911091711:web:c90b811537d1fbc55d9fca"
 };
