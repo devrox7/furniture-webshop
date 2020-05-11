@@ -39,7 +39,8 @@
                   v-model="product.discount"
                 ></v-text-field>
                 <v-text-field name="size" label="Size" id="size" v-model="product.size"></v-text-field>
-                <v-text-field name="image" label="Image" id="image" v-model="product.image"></v-text-field>
+                <v-text-field name="image" label="Image" id="image" v-model="product.image"  persistent-hint hint="Image field requires a link which contains a picture."></v-text-field>
+                
                 <!-- <v-file-input
                   name="image"
                   label="Image"
