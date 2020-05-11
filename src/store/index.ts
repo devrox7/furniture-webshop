@@ -46,10 +46,15 @@ export default new Vuex.Store({
     },
 
     deleteProduct(state, payload){
-      // var data = []
-      state.products.filter(item => item !== payload)
+      const index = state.products.findIndex(product => product.id == payload)
+      state.products.splice(index, 1)
 
-    }
+    },
+
+    // updateProduct(state, payload){
+    //   const item = state.products.find(product => product.id === payload.id);
+    //   Object.assign(item, payload);
+    // }
   },
 
 // ACTIONS ------------------------------------------------------------------------
@@ -82,12 +87,7 @@ export default new Vuex.Store({
         })
         .catch(function(error) {
           console.log(error);
-          // An error happened.
         });
-      // firebase.auth().signOut()
-      //   alert("Logged out!");
-      //   commit('setUser', null)
-        
     },
 
     clearError({commit}){
@@ -116,6 +116,7 @@ export default new Vuex.Store({
     },
 
     createProduct({commit}, payload){
+      // debugger;
         const product = {
           roomsType: payload.roomsType,
           color: payload.color,
@@ -126,11 +127,12 @@ export default new Vuex.Store({
           price: payload.price,
           size: payload.size
         }
-        const doc = firebase.firestore().collection('Products').doc()
-        doc.set(product)
+        
+        const products = firebase.firestore().collection('Products').doc()
+        products.set(product)
         .then(()=>{
-          const key = doc.id
-            console.log(key)
+          // const key = doc.id
+          //   console.log(key)
             // commit('CreateProduct',{
             //   ...product,
             //   id:key
@@ -151,12 +153,9 @@ export default new Vuex.Store({
                 const products = []
                 snapshot.docs.forEach(doc => {
                   const id = doc.id
-
                   const data = {id:id, data: doc.data() }
-                  // data.push(id)
-                  // data.push(doc.data())
                   products.push(data)
-                  // console.log(doc.data())
+
                 });
                 commit('getProducts', products)
                 commit('setLoading',false)
@@ -174,16 +173,39 @@ export default new Vuex.Store({
 
         });
     },
+
     deleteProduct({commit}, payload){
-      const product = firebase.firestore().collection("Products");
-      
-      product.doc(payload).delete().then(function() {
-        console.log("Document successfully deleted!");
+      const products = firebase.firestore().collection("Products");
+     debugger;
+      products.doc(payload).delete().then(function() {
+        console.log("Document successfully updated!");
         commit('deleteProduct', payload)
+    }).catch(function(error) {
+        console.error("Error updating document: ", error);
+    })
+    },
+
+    updateProduct({commit}, payload){
+      const products = firebase.firestore().collection("Products");
+      // debugger;
+      const product = {
+        roomsType: payload.product.roomsType,
+        color: payload.product.color,
+        description: payload.product.description,
+        discount: payload.product.discount,
+        image: payload.product.image,
+        name: payload.product.name,
+        price: payload.product.price,
+        size: payload.product.size
+      }
+      products.doc(payload.productID).update(product).then(function() {
+        console.log("Document successfully deleted!");
+        commit('updateProduct', payload)
     }).catch(function(error) {
         console.error("Error removing document: ", error);
     })
     },
+  
     autoSignIn({commit}, payload){
       commit('setUser', {id: payload.uid, products: []})
     }

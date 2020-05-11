@@ -8,18 +8,38 @@
           <v-row class="ma-2">
             <v-col cols="12" sm="6" md="6" lg="6" xl="6">
               <v-form @submit.prevent="onCreateProduct">
-                <v-text-field name="name" label="Product Name" id="name" v-model="name" required></v-text-field>
-                <v-text-field name="price" label="Price" id="price" v-model="price" required></v-text-field>
+                <v-text-field
+                  name="name"
+                  label="Product Name"
+                  id="name"
+                  v-model="product.name"
+                  required
+                ></v-text-field>
+                <v-text-field
+                  type="number"
+                  name="price"
+                  label="Price"
+                  id="price"
+                  v-model="product.price"
+                  required
+                ></v-text-field>
                 <v-text-field
                   name="description"
                   label="Description"
                   id="description"
-                  v-model="description"
+                  v-model="product.description"
                   required
                 ></v-text-field>
-                <v-text-field name="disount" label="Disount" id="disount" v-model="discount"></v-text-field>
-                <v-text-field name="size" label="Size" id="size" v-model="size"></v-text-field>
-                <v-text-field name="image" label="Image" id="image" v-model="image"></v-text-field>
+                <v-text-field
+                  append-icon="%"
+                  type="number"
+                  name="disount"
+                  label="Discount"
+                  id="disount"
+                  v-model="product.discount"
+                ></v-text-field>
+                <v-text-field name="size" label="Size" id="size" v-model="product.size"></v-text-field>
+                <v-text-field name="image" label="Image" id="image" v-model="product.image"></v-text-field>
                 <!-- <v-file-input name="image" label="Image" id="image" required></v-file-input> -->
 
                 <v-autocomplete
@@ -31,7 +51,7 @@
                   label="Colors"
                   multiple
                   return-object
-                  v-model="color"
+                  v-model="product.color"
                 ></v-autocomplete>
                 <v-select
                   required
@@ -43,7 +63,7 @@
                   label="Room Type"
                   color="purple darken-3"
                   return-object
-                  v-model="roomsType"
+                  v-model="product.roomsType"
                 ></v-select>
 
                 <v-btn :disabled="!formIsValid" color="primary" class="ma-2" type="submit">Create</v-btn>
@@ -51,7 +71,7 @@
             </v-col>
 
             <v-col class="d-flex justify-center">
-              <img :src="image" height="400px" />
+              <img :src="product.image" height="400px" />
             </v-col>
           </v-row>
           <v-divider></v-divider>
@@ -67,6 +87,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import Products from "../products/Products.vue";
+import { IProduct } from "../../models/product.model";
 
 // import { db } from "../../main";
 
@@ -76,14 +97,7 @@ import Products from "../products/Products.vue";
   }
 })
 export default class CreateProduct extends Vue {
-  name = "";
-  price = null;
-  description = "";
-  discount = null;
-  size = "";
-  color = "";
-  roomsType = "";
-  image = "";
+  product: IProduct = new IProduct();
 
   colors = [
     "White",
@@ -109,11 +123,11 @@ export default class CreateProduct extends Vue {
 
   get formIsValid() {
     return (
-      this.name !== "" &&
-      this.price !== null &&
-      this.description !== "" &&
-      this.image !== "" &&
-      this.roomsType !== ""
+      this.product.name !== "" &&
+      this.product.price !== null &&
+      this.product.description !== "" &&
+      this.product.image !== "" &&
+      this.product.roomsType !== []
     );
   }
 
@@ -127,16 +141,8 @@ export default class CreateProduct extends Vue {
     if (!this.formIsValid) {
       return;
     }
-    const product = {
-      name: this.name,
-      price: this.price,
-      description: this.description,
-      discount: this.discount,
-      size: this.size,
-      color: this.color,
-      image: this.image,
-      roomsType: this.roomsType
-    };
+    // debugger;
+    const product = this.product;
     this.$store.dispatch("createProduct", product);
     this.$router.push("/products");
   }
