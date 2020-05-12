@@ -165,6 +165,7 @@
                   ></v-select>
 
                   <v-btn
+                    :disabled="!formIsValid"
                     color="primary"
                     class="ma-2"
                     @click="editProduct(editableProduct, productId)"
@@ -278,15 +279,15 @@ export default class Products extends Vue {
     return this.$store.getters.roomsType;
   }
 
-  // get formIsValid() {
-  //   return (
-  //     this.editableProduct.name !== "" &&
-  //     this.editableProduct.price !== null &&
-  //     this.editableProduct.description !== "" &&
-  //     this.editableProduct.image !== "" &&
-  //     this.editableProduct.roomsType !== ""
-  //   );
-  // }
+  get formIsValid() {
+    return (
+      this.editableProduct.name !== "" &&
+      this.editableProduct.price !== null &&
+      this.editableProduct.description !== "" &&
+      this.editableProduct.image !== "" &&
+      this.editableProduct.roomsType !== []
+    );
+  }
 
   // get loading() {
   //   return this.$store.getters.loading;

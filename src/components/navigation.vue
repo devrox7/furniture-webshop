@@ -62,10 +62,15 @@
           <!-- <v-tab to="/login">LOGIN</v-tab> -->
           <!-- <v-tab to="/admin-panel">Admin </v-tab> -->
         </v-tabs>
-        <v-btn v-if="!userIsAuthenticated" class="mb-2" to="/login" color="primary">
-          Admin
-          <v-icon>mdi-shield-account</v-icon>
-        </v-btn>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn v-on="on" v-if="!userIsAuthenticated" class="mb-2" to="/login" color="primary">
+              Admin
+              <v-icon>mdi-shield-account</v-icon>
+            </v-btn>
+          </template>
+          <span>Admin Login</span>
+        </v-tooltip>
       </template>
     </v-app-bar>
   </div>

@@ -96,14 +96,11 @@ export default new Vuex.Store({
 
     getRoomsType({commit}){
       const roomsType = firebase.firestore().collection("Room Type");
-
-
       roomsType.get().then(rooms => {
               const roomsType =[]
 
               rooms.forEach(room => {
                 roomsType.push(room.id)
-                
               })
               commit('setRoomsType', roomsType)
                 
@@ -111,8 +108,6 @@ export default new Vuex.Store({
             .catch(function(error: Error) {
               console.log("Error getting document:", error);
             });
-
-      
     },
 
     createProduct({commit}, payload){
@@ -130,14 +125,15 @@ export default new Vuex.Store({
           price: payload.price,
           size: payload.size
         }
-        let imageUrl;
+        // let imageUrl;
         let key;
         
         const products = firebase.firestore().collection('Products').doc()
         products.set(product)
         .then(()=>{
-           key = products.id
-          return key})
+          key = products.id
+          return key
+        })
         //   .then(key=>{
         //   debugger
         //   const filename = payload.image.name;
@@ -155,33 +151,26 @@ export default new Vuex.Store({
     },
 
      getProducts({commit}){
-      commit('setLoading',true)
+        commit('setLoading',true)
         const products = firebase.firestore().collection("Products");
 
         products.get().then((snapshot) => {
             if (snapshot.docs) {
-              
                 const products = []
                 snapshot.docs.forEach(doc => {
                   const id = doc.id
                   const data = {id:id, data: doc.data() }
                   products.push(data)
-
                 });
                 commit('getProducts', products)
                 commit('setLoading',false)
-
-
             } else {
-
                 console.log("No documents!");
                 commit('setLoading',false)
-
             }
         }).catch(function(error) {
             console.log("Error getting documents:", error);
             commit('setLoading',false)
-
         });
     },
 
@@ -224,41 +213,26 @@ export default new Vuex.Store({
     
   },
 
-// MODULES ------------------------------------------------------------------------
-  modules: {
-  },
-
 // GETTERS ------------------------------------------------------------------------
   getters:{
     user(state){
       return state.user
     },
-    loading(state){
-      console.log(state.loading)
 
+    loading(state){
       return state.loading
     },
+
     error(state){
       return state.error
     },
+
     products(state){
-      console.log(state.products)
       return state.products
     },
-    roomsType(state){
-      console.log(state.roomsType)
 
+    roomsType(state){
       return state.roomsType
     }
-
   }
 })
-
-
-
-// import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators'
-
-// export default new VuexModule({
-
-
-// })
